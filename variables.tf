@@ -11,7 +11,7 @@ variable "pat_token" {
 
 variable "repository_map" {
   type        = map(string)
-  description = "Mapping of repository names to their respective contributors"
+  description = "Map of GitHub repository name to it's template repository"
 }
 
 variable "repo_owner" {
@@ -20,9 +20,9 @@ variable "repo_owner" {
   default     = "debrin-og"
 }
 
-variable "template_repo_name" {
-  type        = string
-  description = "Github template repository name"
+variable "repo_collaborator" {
+  type = string
+  description = "GitHub username of the user"
 }
 
 variable "host" {

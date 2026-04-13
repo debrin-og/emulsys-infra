@@ -7,7 +7,7 @@ resource "github_repository" "repositories" {
 
   template {
     owner                = var.repo_owner
-    repository           = var.template_repo_name
+    repository           = each.value
     include_all_branches = false
   }
 
@@ -25,7 +25,7 @@ resource "github_repository_collaborator" "collaborators" {
   for_each = var.repository_map
 
   repository = each.key
-  username   = each.value
+  username   = var.repo_collaborator
   permission = "push"
 }
 
