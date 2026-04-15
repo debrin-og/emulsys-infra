@@ -22,7 +22,12 @@ resource "github_repository" "repositories" {
 }
 
 resource "github_repository_collaborator" "collaborators" {
-  for_each = var.repository_map
+  # for_each = var.repository_map
+  for_each = {
+    for repo_key, repo_data in var.repository_map :
+    repo_key => repo_data
+    if var.repo_collaborator != var.repo_owner
+  }
 
   repository = github_repository.repositories[each.key].name
   username   = var.repo_collaborator
