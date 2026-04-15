@@ -24,7 +24,7 @@ resource "github_repository" "repositories" {
 resource "github_repository_collaborator" "collaborators" {
   for_each = var.repository_map
 
-  repository = each.key
+  repository = github_repository.repositories[each.key].name
   username   = var.repo_collaborator
   permission = "push"
 }
@@ -32,7 +32,7 @@ resource "github_repository_collaborator" "collaborators" {
 resource "github_repository_webhook" "commit_webhook" {
   for_each = var.repository_map
 
-  repository = each.key
+  repository = github_repository.repositories[each.key].name
 
   configuration {
     url          = "${var.host}${var.github_commit_commit_webhook_path}"
