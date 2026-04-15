@@ -6,7 +6,6 @@ variable "pat_token" {
   type        = string
   description = "Personal Access Token of the Github Account Owner"
   sensitive   = true
-  ephemeral   = true
 }
 
 variable "repository_map" {
