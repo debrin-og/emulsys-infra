@@ -8,9 +8,14 @@ variable "pat_token" {
   sensitive   = true
 }
 
-variable "repository_map" {
-  type        = map(string)
-  description = "Map of GitHub repository name to it's template repository"
+variable "repo_name" {
+  type        = string
+  description = "Name of the sandbox GitHub repository to create"
+}
+
+variable "template_repo" {
+  type        = string
+  description = "Template repository (short name, under repo_owner) to generate the sandbox repo from"
 }
 
 variable "repo_owner" {

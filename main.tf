@@ -1,13 +1,11 @@
-resource "github_repository" "repositories" {
-  for_each = var.repository_map
-
-  name       = each.key
+resource "github_repository" "repository" {
+  name       = var.repo_name
   visibility = "public"
   fork       = true
 
   template {
     owner                = var.repo_owner
-    repository           = each.value
+    repository           = var.template_repo
     include_all_branches = false
   }
 
@@ -21,23 +19,16 @@ resource "github_repository" "repositories" {
   }
 }
 
-resource "github_repository_collaborator" "collaborators" {
-  # for_each = var.repository_map
-  for_each = {
-    for repo_key, repo_data in var.repository_map :
-    repo_key => repo_data
-    if var.repo_collaborator != var.repo_owner
-  }
+resource "github_repository_collaborator" "collaborator" {
+  count = var.repo_collaborator != var.repo_owner ? 1 : 0
 
-  repository = github_repository.repositories[each.key].name
+  repository = github_repository.repository.name
   username   = var.repo_collaborator
   permission = "push"
 }
 
 resource "github_repository_webhook" "commit_webhook" {
-  for_each = var.repository_map
-
-  repository = github_repository.repositories[each.key].name
+  repository = github_repository.repository.name
 
   configuration {
     url          = "${var.host}${var.github_commit_commit_webhook_path}"
