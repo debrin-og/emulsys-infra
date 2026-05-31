@@ -22,6 +22,6 @@ terraform {
 }
 
 provider "github" {
-  owner = "debrin-og"
+  owner = var.repo_owner
   token = var.pat_token
 }

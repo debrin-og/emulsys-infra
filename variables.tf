@@ -15,8 +15,8 @@ variable "repository_map" {
 
 variable "repo_owner" {
   type        = string
-  description = "Github repository owner"
-  default     = "debrin-og"
+  description = "GitHub org that owns the created sandbox repos and their templates (set by the backend run variable; this default is a CLI fallback)"
+  default     = "emulsys-sandbox-org"
 }
 
 variable "repo_collaborator" {
