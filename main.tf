@@ -1,6 +1,6 @@
 resource "github_repository" "repository" {
   name       = var.repo_name
-  visibility = "public"
+  visibility = "private"
   fork       = true
 
   template {
