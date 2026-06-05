@@ -34,7 +34,7 @@ resource "github_repository_webhook" "commit_webhook" {
     url          = "${var.host}${var.github_commit_commit_webhook_path}"
     content_type = "json"
     insecure_ssl = false
-    # secret       = var.webhook_secret         # HMAC secret
+    secret       = var.webhook_secret # HMAC secret (X-Hub-Signature-256)
   }
 
   # Fire on every push (i.e., commits pushed to any branch/tag)
