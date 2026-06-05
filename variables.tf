@@ -40,3 +40,9 @@ variable "github_commit_commit_webhook_path" {
   description = "URL path where the commit webhook should be sent"
   default     = "/api/v1/hooks/github/commits"
 }
+
+variable "webhook_secret" {
+  type        = string
+  description = "Shared secret GitHub uses to sign webhook deliveries (X-Hub-Signature-256, HMAC-SHA256). Must match the backend's emulsys.webhook.github-secret. Supplied via the HCPT org variable set."
+  sensitive   = true
+}
